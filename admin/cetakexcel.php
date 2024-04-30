@@ -23,7 +23,10 @@ $objPHPExcel->setActiveSheetIndex(0)
 // Atur gaya judul
 $objPHPExcel->getActiveSheet()->getStyle('A1:N1')->applyFromArray([
     'font' => ['bold' => true], // Atur tebal (bold) teks
-    'alignment' => ['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER], // Atur perataan teks di tengah
+    'alignment' => [
+        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Atur perataan teks di tengah
+        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER, // Atur perataan vertikal di tengah
+    ],
 ]);
 
 // Add data
@@ -46,8 +49,18 @@ $objPHPExcel->setActiveSheetIndex(0)
 // Atur gaya header kolom
 $objPHPExcel->getActiveSheet()->getStyle('A2:N2')->applyFromArray([
     'font' => ['bold' => true], // Atur tebal (bold) teks
-    'alignment' => ['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER], // Atur perataan teks di tengah
+    'alignment' => [
+        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Atur perataan teks di tengah
+        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER, // Atur perataan vertikal di tengah
+    ],
 ]);
+
+// Atur perataan vertikal di tengah untuk semua sel data
+$highestRow = $objPHPExcel->getActiveSheet()->getHighestRow();
+$highestColumn = $objPHPExcel->getActiveSheet()->getHighestColumn();
+$cellRange = 'A2:' . $highestColumn . $highestRow;
+$objPHPExcel->getActiveSheet()->getStyle($cellRange)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+$objPHPExcel->getActiveSheet()->getStyle($cellRange)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
 // Add data
 $tgl1 = $_GET['tgl1'];
@@ -113,6 +126,23 @@ foreach ($data as $d) {
     }
 
     $row++;
+}
+
+// Atur gaya untuk semua sel data
+$highestRow = $objPHPExcel->getActiveSheet()->getHighestRow();
+$highestColumn = $objPHPExcel->getActiveSheet()->getHighestColumn();
+$cellRange = 'A3:' . $highestColumn . $highestRow;
+$objPHPExcel->getActiveSheet()->getStyle($cellRange)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+$objPHPExcel->getActiveSheet()->getStyle($cellRange)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
+// Set auto size for columns A to N
+for ($col = 'A'; $col <= 'N'; $col++) {
+    $objPHPExcel->getActiveSheet()->getColumnDimension($col)->setAutoSize(true);
+}
+
+// Set height for all rows
+for ($i = 1; $i <= $objPHPExcel->getActiveSheet()->getHighestRow(); $i++) {
+    $objPHPExcel->getActiveSheet()->getRowDimension($i)->setRowHeight(100);
 }
 
 // Set sheet title
