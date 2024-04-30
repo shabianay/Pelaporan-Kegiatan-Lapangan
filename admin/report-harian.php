@@ -23,7 +23,6 @@ include "templates/sidebar-report.php";
 
   <!-- Main content -->
   <section class="content">
-
     <div class="card">
       <div class="card-header">
         <h3 class="card-title"><i class="fas fa-book mr-3"></i>Data Pelaporan Kegiatan Lapangan</h3>
@@ -37,8 +36,12 @@ include "templates/sidebar-report.php";
         </div>
       </div>
       <div class="card-body">
+        <a href="cetakpdf.php?tgl1=<?php echo $_POST['tgl1']; ?>&tgl2=<?php echo $_POST['tgl2']; ?>" class="btn btn-primary">PDF</a>
+        <a href="cetakexcel.php?tgl1=<?php echo $_POST['tgl1']; ?>&tgl2=<?php echo $_POST['tgl2']; ?>" class="btn btn-success">Excel</a>
+      </div>
+      <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-hover" id="table-report" width="100%">
+          <table class="table table-hover" width="100%">
             <thead align="center">
               <th>No.</th>
               <th>Nama Pegawai</th>
