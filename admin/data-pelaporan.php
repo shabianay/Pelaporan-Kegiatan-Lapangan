@@ -66,7 +66,7 @@ include "templates/sidebar-pelaporan.php"
                   <td><?= $d['tgl_kegiatan']; ?></td>
                   <td><?= $d['j_kegiatan']; ?></td>
                   <td><?= $d['ket']; ?></td>
-                  <td><?= $d['foto']; ?></td>
+                  <td><img src="../<?= $d['foto']; ?>" alt="Foto Kegiatan" style="max-width: 100px;height: auto;"> </td>
                   <td><a href="detail-pelaporan.php?id=<?= $d['id']; ?>" class="btn btn-sm btn-outline-info mr-2" style="font-size: 15px; width: 80px;"><i class="fas fa-search mr-1"></i>Detail</a>
                     <a href="delete-pelaporan.php?id=<?= $d['id']; ?>" class="btn btn-sm btn-outline-danger" style="font-size: 15px; width: 80px;"><i class="fas fa-trash-alt mr-1"></i>Delete</a>
                   </td>
